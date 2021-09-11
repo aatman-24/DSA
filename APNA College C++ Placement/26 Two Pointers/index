@@ -1,0 +1,11 @@
+26.1 Three Sum Problem
+
+- bool threesum(vector<int> arr, int target) : O(N^2) - O(1)
+
+26.2 Max Consecutive Ones
+
+- int maxOne(vector<int> arr, int k) : O(N)
+
+26.3 Longest substring without repeating characters
+
+- int notRepeatMax(string s) : O(N) 

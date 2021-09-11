@@ -22,6 +22,21 @@ typedef map<int,int> mii;
 Question : 40. Combination Sum II
 Topic : Array, Backtracking
 Problems : https://leetcode.com/problems/combination-sum-ii/
+
+==============================> Explanation <=============================================
+
+- Both are same.
+
+Time = O(2^N * K) -> 2 choice either add or not for n object. K is total combination possible don't calculate direct
+        varry with problem.
+Space = O(K * X)(all are combination sum) + O(N) (single vector)
+
+
+==============================> Edge Case <=============================================
+
+
+
+
 */
 
 class Solution {
@@ -52,6 +67,42 @@ public:
         sort(arr, arr+N);
         vi tmp;
         solve(tmp, 0, target);   
+        return ans;
+    }
+};
+
+
+class Solution {
+public:
+
+    void findCombination(int idx, int target, vector<int> &arr, vector<vector<int>> &ans, vector<int> &ds)
+    {
+        if(target == 0) {
+            ans.push_back(ds); 
+            return;
+        }
+
+        for(int i = idx; i < N; i++) {
+
+            // Avoid duplicates.
+            if(i > idx && arr[i] == arr[i-1]) continue;
+            
+            if(arr[i] > target) break;
+
+            if(target - arr[i] >= 0) {
+
+                ds.push_back(arr[i]);
+                solve(i+1, target - arr[i], arr, ans, ds);
+                ds.pop_back();
+            }
+        }
+    }
+
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target)     {
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> ans;
+        vector<int> ds;
+        findCombination(0, target, candidates, ans, ds);
         return ans;
     }
 };
