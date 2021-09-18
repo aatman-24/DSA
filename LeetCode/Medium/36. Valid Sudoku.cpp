@@ -24,18 +24,27 @@ typedef map<int,int> mii;
 Question : 36. Valid Sudoku
 Topic : Sudoku
 Problems : https://leetcode.com/problems/valid-sudoku/
+
 ==============================> Explanation <=============================================
 
+1) 37. Sudoku Solver Got from here. Simple O(9) For each cell.
 
-==============================> Edge Case <=============================================
+2) Hashing Technique, Using Extra space we keep track of same number can not be 
+place in same row, col or in box.
 
-1) Time = O(9 * N^2)
-   Space = O(1)
+k = i / 3 * 3 + j / 3; (k represent the box number).
 
-1) Time = O(N^2)
-   Space = O(N)
+==============================> Apporach and Time Complexity <=============================================
+
+1) Standard:
+Time = O(9 * N^2)
+Space = O(1)
+
+1) Hashing:
+Time = O(N^2)
+Space = O(N)
+
 */
-
 
 
 class Solution {
@@ -84,17 +93,27 @@ public:
 class Solution
 {
 public:
-    bool isValidSudoku(vector<vector<char> > &board)
-    {
+    bool isValidSudoku(vector<vector<char> > &board) {
+
+        // used1 -> checking row don't have same number.
+        // used2 -> checking col don't have same number.
+        // used3 -> checking box don't have same number.
+
         int used1[9][9] = {0}, used2[9][9] = {0}, used3[9][9] = {0};
         
-        for(int i = 0; i < board.size(); ++ i)
-            for(int j = 0; j < board[i].size(); ++ j)
-                if(board[i][j] != '.')
-                {
+        for(int i = 0; i < board.size(); ++i)
+            for(int j = 0; j < board[i].size(); ++j)
+
+                if(board[i][j] != '.') {
+
                     int num = board[i][j] - '0' - 1, k = i / 3 * 3 + j / 3;
+
+                    // As per the below figure for same box (same k) same number can
+                    // not be placed.
+
                     if(used1[i][num] || used2[j][num] || used3[k][num])
                         return false;
+
                     used1[i][num] = used2[j][num] = used3[k][num] = 1;
                 }
         
@@ -103,6 +122,7 @@ public:
 };
 
 // k = i / 3 * 3 + j / 3
+
 // 0  0  0 | 1  1  1 | 2  2  2
 // 0  0  0 | 1  1  1 | 2  2  2
 // 0  0  0 | 1  1  1 | 2  2  2

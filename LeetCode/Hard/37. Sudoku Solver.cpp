@@ -26,9 +26,11 @@ Topic : Recursion, Backtracking, Branch and Bound
 Problems : https://leetcode.com/problems/sudoku-solver/
 
 ==============================> Explanation <=============================================
+- Standard Problem on Backtracking.
 
+==============================> Apporach and Time Complexity <=============================================
 
-==============================> Edge Case <=============================================
+1) Brute Force + Backtracking:
 
 Time = O(9 * 9^N^2) -> (1-9) possiblity for all empty blocks. We can calculate only for empty blocks.
                         so N^2 block with 9 possiblity. And every empty block take O(9) to check 

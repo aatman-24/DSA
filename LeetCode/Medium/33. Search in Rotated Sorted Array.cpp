@@ -64,8 +64,6 @@ Test case:
 
                 move the left side. h = mid - 1.
 
-
-
 In short, 
 
     We first find which part is sorted [l, m] or [m, h]. Once we find that 
@@ -76,8 +74,14 @@ In short,
 
 
 /*
-==============================> Edge Case <=============================================
+==============================> Apporach and Time Complexity <=============================================
+1) Linear Search:
+Time: O(N)
+Space: O(1)
 
+2) Binary Search:
+Time: O(logN)
+Space: O(1)
 
 */
 
@@ -113,7 +117,7 @@ public:
                 }
             }
 
-            // sorted parts id [mid, high]
+            // sorted parts is [mid, high]
             else {
 
                 // target is in sorted part.

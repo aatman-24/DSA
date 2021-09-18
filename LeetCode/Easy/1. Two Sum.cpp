@@ -25,22 +25,32 @@ Topic : Two Pointer, Hashing
 Problems : https://leetcode.com/problems/two-sum/
 
 ==============================> Explanation <=============================================
+1) Brute Force: Try all the pair.
 
-*/
+2) Sorting + Linear Time: Sort the array and then apply Two Pointer Apporach.But In answer
+index pair required that time it is not work. Like Here It is not worked.
 
+3) Hashing: Check map contains the (target-curr). If yes return this pair otherwise
+            add the current element into the map.
 
-/*
-==============================> Edge Case <=============================================
+==============================> Apporach and Time Complexity <=============================================
+1) Brute Force:
+Time: O(N^2)
+Space: O(1)
 
+2) Sorting + Linear Time(not work here):
+Time: O(NlogN) + O(N)
+Space: O(1)
+
+3) Hashing:
+Time: O(N)
+Space: O(N)
 
 */
 
 class Solution {
 public:
 
-    // 1 Brute Foce -> O(N^2)
-
-    // 2 Optimal (Extra Space) -> O(N) + O(N)
     vector<int> twoSum(vector<int>& nums, int target) {
 
         unordered_map<int, int> mp;
@@ -59,9 +69,4 @@ public:
         return {-1,-1};
 
     }
-
-
-
-    // 3 Optimal N*logN Sort and One pass. But using this we can only check the
-    // target can be made by two element or not.
 };

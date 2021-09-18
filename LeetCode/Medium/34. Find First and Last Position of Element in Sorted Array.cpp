@@ -20,7 +20,7 @@ d
 /*
 ==============================> Description <=============================================
 
-Question : 34. Find First and Last Position of Element in Sorted Arra
+Question : 34. Find First and Last Position of Element in Sorted Array
 Topic : Binary Search
 Problems : https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
 
@@ -41,7 +41,6 @@ like, [2,3] target = 4 then both lower_bound and upper_bound points after the 3.
 
 So handle this case.
 
-
 But I want to implement both lower_bound and upper_bound by myself. 
 
 Here lowerBound and upperBound is same with c++ STL.
@@ -51,7 +50,13 @@ Here lowerBound and upperBound is same with c++ STL.
 
 /*
 ==============================> Edge Case <=============================================
+1) Linear Search:  
+Time: O(N)
+Space: O(1)
 
+2) Binary Search
+Time: O(logN)(Two Times)
+Space: O(1)
 
 */
 

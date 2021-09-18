@@ -52,7 +52,7 @@ public:
 
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
 
-        // Try to make first as minimum array.
+        // Try to make first as smaller array.
         if(nums1.size() > nums2.size()) return findMedianSortedArrays(nums2, nums1);
 
 
@@ -61,8 +61,11 @@ public:
         // Binary Search on first array.
         while(low <= high) {
 
-            // cut = 1 means only 1 element. 2 menas two element.
-            int cut1 = (low + high) >> 1;
+            // cut1 -> picking the cut1(0, cut1) elements from nums1.
+            // cut2 -> picking the cut2(0, cut2) elements from nums2. (total/2 - cut1)
+            int cut1 = (low + high) >> 1; 
+
+            // For odd elements we try to make partition n+1 | n so that is reason +1 is added.
             int cut2 = (n1 + n2 + 1) / 2 - cut1;
 
             // find out left side and right side of split.
@@ -78,6 +81,7 @@ public:
                     return ((max(left1, left2) + min(right1, right2)) / 2.0);
                 }
                 else {
+                    // for odd length, we adjust our answer so that it is from the left part.
                     return max(left1, left2);
                 }
 
@@ -87,6 +91,7 @@ public:
                 high = cut1 - 1;
             }
             // right contains larger element so right needs to be shrink. Left increase.
+            // left2 > right1 (that means right1 needs to increase (left2 needs to decrease).
             else {
                 low = cut1 + 1;
             }

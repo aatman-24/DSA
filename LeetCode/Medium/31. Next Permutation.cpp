@@ -20,7 +20,7 @@ typedef map<int,int> mii;
 ==============================> Description <=============================================
 
 Question : 31. Next Permutation
-Topic : Array, Next Pointer
+Topic : Array, Two Pointer
 Problems : https://leetcode.com/problems/next-permutation/
 /*
 ==============================> Explanation <=============================================
@@ -59,10 +59,8 @@ to find greater number than current because it is already greatest number.
 which is just greater than prefixrange nums[i]. and reverse the suffix to make it
 more minimize.
 
-*/
-
-/*
 ==============================> Edge Case <=============================================
+
 
 when number is like -> 033 
 and need to swap (3) with other number suppose(2) then alwasy choose
@@ -70,6 +68,16 @@ right most numuber.
 
 032 -> reverse of it -> 230
 023 -> reverse of it -> 320 (greater than above)
+
+
+==============================> Apporach and Time Complexity <=============================================
+1) Brute Force:
+Time: O(N!) * O(N)(To compare)(Generate all permutation keep track of current, next one is answer).
+Space: O(N)
+
+2) 
+Time: O(N)(Overall)
+Space: O(1)
 
 */
 
@@ -89,6 +97,7 @@ public:
     }
 
     void nextPermutation(vector<int>& nums) {
+
         int n = nums.size();
         if(n <= 1) return;
         

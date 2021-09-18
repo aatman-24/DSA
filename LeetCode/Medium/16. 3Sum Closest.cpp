@@ -27,20 +27,20 @@ Problems : https://leetcode.com/problems/3sum-closest/
 ==============================> Explanation <=============================================
 - 3Sum Apporach. (Same) but keep track of minDiff. If found the differnce between and
 target is less than minDiff then update the result and minDiff.
-
 - All Apporach of 3Sum is apply to the here.
 
-I used Most Optimized apporach here.
+==============================> Apporach and Time Complexity  <=============================================
+1) Brute Force:
+Time: O(N^3)
+Space: O(1)
 
+2) HashMap:
+Time: O(NlogN)(Sort) + O(N^2)(Traverse through the Pair)
+Space: O(N)
 
-Time = O(NLogN) + O(N^2) = O(N^2)
-Space = O(1)
-
-*/
-
-
-/*
-==============================> Edge Case <=============================================
+2) Two Pointer Apporach(Here):
+Time: O(NlogN)(Sort) + O(N^2)
+Space: O(1)
 
 */
 
@@ -67,6 +67,7 @@ public:
                     res = curSum;
                 }
 
+                // Same target so difference is zero. No need to check further.
                 if(target == curSum) {
                     return curSum;
                 }
@@ -81,6 +82,5 @@ public:
         }
 
         return res;
-
     }
 };

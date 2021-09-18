@@ -28,16 +28,15 @@ Two Sum Technique.
 
 How to Handle Duplicate ?
 
+- Ideas is that, For the first pointer i, we check that if nums[i] and nums[i-1] are same
+then we don't start from i we skipped it.
 
-- simple for the first pointer. we check weather prvious number is same 
-then we don't start again with same number.
+- After that, In loop
+    
+    If we found triplet = {i, begin, end} this tripplet. Then While searching in loop,
 
-
-- when we found the triplet {i, begin, end} indexs. Now to avoid duplicate we again 
-see for the one of the pointer begin or end.
-The next nums[begin] should not be same as current triplet nums[begin].
-we can do the same for the end pointer also. but if we already covered two pointer than 
-for the end pointer no need to handle duplicate. It automatic never allowed the duplicate.
+    we try to make differnt triplet so skip all the nums[begin] which is same as triplet[begin]
+    and same with end pointer also. 
 
 Duplicate Case = -2 0 0 2 2 
 
@@ -45,8 +44,18 @@ Duplicate Case = -2 0 0 2 2
 
 
 /*
-==============================> Edge Case <=============================================
+==============================> Apporach and Time Complexity  <=============================================
+1) Brute Force:
+Time: O(N^3)
+Space: O(1)
 
+2) HashMap:
+Time: O(NlogN)(Sort) + O(N^2)(Traverse through the Pair)
+Space: O(N)
+
+2) Two Pointer Apporach:
+Time: O(NlogN)(Sort) + O(N^2)
+Space: O(1)
 
 */
 
@@ -85,7 +94,7 @@ class Solution {
                     // we can do for the end pointer also. But we already maintain the two
                     // pointer which does not allow the duplicate. so if just do the end--;
                     // then it's also work.
-                    while(begin < end && nums[end] == nums[2]) end--;
+                    while(begin < end && nums[end] == triplet[2]) end--;
                     // end--; also work 
                 }
                 else if(total < 0) {
@@ -96,6 +105,59 @@ class Solution {
                 }
             }
         }
+        return ans;
+    }
+};
+
+
+
+class Solution {
+public:
+
+    vector<vector<int>> threeSum(vector<int>& nums) {
+
+        vector<vector<int>> ans;
+        
+        sort(nums.begin(), nums.end());
+
+        if(nums.size() < 3)
+            return ans;
+
+        // Here target is 0. That's why there should be number which is start less or zero 
+        // In starting of the array.
+        if(nums[0] > 0)
+            continue;
+
+        // Store the {nums[i], last_index_nums[i]}. 
+        map<int,int> mp;
+        for(int i = 0 ; i < nums.size(); i++) {
+            mp[nums[i]] = i;
+        }
+        
+        for(int i = 0; i < nums.size() - 1; i++) {
+
+            // Avoid such number. It don't give the triplet for target 0.
+            if(nums[i] > 0)
+                continue;
+
+            for(int j = i + 1; j < nums.size(); j++) {
+
+                int required = 0 - nums[i] - nums[j];
+
+                // Check If required is in the map and Index should be i < j < required.
+                // To avoid the duplication we always add the last required element's .
+                if(mp.count(required) && mp[required] > j) {
+                    ans.push_back({nums[i], nums[j], required});
+                }
+
+                // Skip the all duplicate of nums[j] if they are.
+                j = mp[nums[j]];
+            }
+
+            // Skip all the duplicate of nums[i] if they are.
+            i = mp[nums[i]];
+        }
+
         return ans;
     }
 };
