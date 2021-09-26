@@ -25,17 +25,14 @@ Problems : https://leetcode.com/problems/combination-sum/
 
 ==============================> Explanation <=============================================
 
-- Both are same.
+1) Backtracking -> We can use the same element twice so pass the same Index for the next solve() call. In recursive
+manner it follow DFS and for loop it follow BFS.
 
-Time = O(2^N * K) -> 2 choice either add or not for n object. K is total combination possible don't calculate direct
-        varry with problem.
-Space = O(2^N)(all are combination sum)(2d Vector) + O(N) (single vector)
+==============================> Apporach and Time Complexity <=============================================
 
-
-==============================> Edge Case <=============================================
-
-
-
+1) Backtracking:
+Time = O(2^N) -> 2 choice either add or not for n object.
+Space = O(2^N)(all are combination sum)(2d Vector) + O(N) (single vector) + O(2^N)(Aux)
 
 */
 
@@ -46,28 +43,38 @@ public:
     int arr[31];
     int n;
     
-    void solve(vi &tmp, int C, int cIndex)
+    void solve(int currentIndex, int target, vector<int> &temp)
     {
-        if(C == 0) ans.push_back(tmp);
-        if(C < 0 || cIndex == n) return;
+        if(target == 0) 
+            ans.push_back(temp);
+        
+        if(target < 0 || currentIndex == n) 
+            return;
 
-        for(int i = cIndex; i < n; i++) {
+        for(int i = currentIndex; i < n; i++) {
+
+            // If target is positive or zero then we can add otherwise not.
             if(C - arr[i] >= 0) {
-                tmp.push_back(arr[i]);
-                solve(tmp, C - arr[i], i);
-                tmp.pop_back();
+
+                temp.push_back(arr[i]);
+                solve(i, C - arr[i], temp);
+                temp.pop_back();
             }
         }
     }
     
     // O(2^N * K) K = possible combination
     vector<vector<int>> combinationSum(vector<int>& candidates, int target)     {
-        ans.clear();
+    
         n = candidates.size();
-        memset(arr, sizeof(arr), 0);
-        for(int i = 0; i < n; i++) arr[i] = candidates[i];
-        vi tmp;
-        solve(tmp, target, 0);
+        for(int i = 0; i < n; i++) 
+            arr[i] = candidates[i];
+        
+        vector<int> temp;
+
+        // backtracking solution.
+        solve(temp, target, 0);
+    
         return ans;
     }
 };

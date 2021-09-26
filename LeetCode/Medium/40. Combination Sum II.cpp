@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 #define ll long long
 #define REP(i,n) for(int i = 0; i < n; i++)
@@ -25,19 +26,45 @@ Problems : https://leetcode.com/problems/combination-sum-ii/
 
 ==============================> Explanation <=============================================
 
-- Both are same.
+1) Backtracking -> Here we can not use the same element twice so if we add the current 
+element at ith index then go to next index i+1. 
 
-Time = O(2^N * K) -> 2 choice either add or not for n object. K is total combination possible don't calculate direct
-        varry with problem.
-Space = O(K * X)(all are combination sum) + O(N) (single vector)
+Duplication not allowed. How to handle this ?
+- First sort the array.
+- As per the recurion tree,
+    If we performing the BFS that time if nums[i] == nums[i-1] then we don't start DFS from the ith because
+    already the (i-1) store the answer so doing from the ith same result we got.
 
 
-==============================> Edge Case <=============================================
+    1 1 1 1 2 3 -> target = 4.
+    
+    0th index have one of solution = [1, 3]. So After 0th index (1, 2, 3) can also have [1, 3] so avoid that, we
+    make the restriction on DFS call while performing BFS(on Loop).
 
+    We can have solution [1, 1, 1, 1] So that reson restiriction on BFS(Loop) not on Depth.
 
+                0
+             /  R  R  R    
+            1   2   3  4
+          /
+         2
+        /
+       3
+     /
+    4 
+    
 
+    - In short, if the previous number is same in level then don't start the new branch from that index.
+    It make the duplication in answer.
+
+==============================> Apporach and Time Complexity <=============================================
+
+1) Backtracking:
+Time = O(2^N) -> 2 choice either add or not for n object.
+Space = O(2^N)(all are combination sum)(2d Vector) + O(N) (single vector) + O(2^N)(Aux)
 
 */
+
 
 class Solution {
 public:
@@ -51,9 +78,14 @@ public:
         if(T < 0 || index == N) return;
 
         for(int i = index; i < N; i++) {
+
+            // Avoid Duplicate. Not Start new Branch from Here. Duplicate subarray is not allowed.
             if(i > index && arr[i] == arr[i-1]) continue;
+
             if(T - arr[i] >= 0) {
                 tmp.push_back(arr[i]);
+
+                // Here we go the next element. Same element is not allowed.
                 solve(tmp, i+1, T - arr[i]);
                 tmp.pop_back();
             }
@@ -61,10 +93,14 @@ public:
     }
 
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target)     {
-        ans.clear();
+        
         N = candidates.size();
-        for(int i = 0; i < N; i++) arr[i] = candidates[i];
+        for(int i = 0; i < N; i++)
+            arr[i] = candidates[i];
+        
         sort(arr, arr+N);
+        
+
         vi tmp;
         solve(tmp, 0, target);   
         return ans;

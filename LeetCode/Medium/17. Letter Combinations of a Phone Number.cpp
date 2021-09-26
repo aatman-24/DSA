@@ -25,19 +25,22 @@ Topic : Backtracking
 Problems : https://leetcode.com/problems/letter-combinations-of-a-phone-number/
 
 ==============================> Explanation <=============================================
-- 1) Backtracking. 8 Queen type.  (this one is i think most preferred)
+1) Backtracking. 39. Combination Sum
+- In DFS we can go upto the size of given number "123". And BFS we go upto the char which is mapped to the
+each digit.
 
 - 2) Iterative. We already covered this type of solution. You also can use the
 size variable to determine how many elements needs to update.
 
 -3) Use Extra space Queue. Pop from the first and modified it and add again.
 
-*/
 
+==============================> Apporach and Time Complexity <=============================================
+1) Backtraking:
+Time: O(Depth^Branch) = O(N^M) -> N = number size(DFS size), M = 3(BFS Size)
+Space: O(N^M)(Aux)
 
-/*
-==============================> Edge Case <=============================================
-
+All take same Complexity.
 */
 
 
@@ -57,10 +60,14 @@ public:
 
         string letters = mp[digits[i]];
         
+
+        // BFS go the size of letters. For the current digit after all digits combination is added to into answer.
         for(int j = 0; j < letters.size(); j++) {
             current.push_back(letters[j]);
-            // go to the next digit.
+
+            // go to the next digit in DFS.
             formString(digits, current, i+1, ans);
+            
             current.pop_back();
         }
     }
@@ -110,7 +117,11 @@ public:
         
         for(auto digit: digits) {
             vector<string> tmp;
+
+            // Add all the char to current answer one by one.
             for(auto candidate: pad[digit - '0']) {
+
+                // single current s has added all the candidate. candidate[a, b, c] -> da, db , dc
                 for(auto s: result) {
                     tmp.push_back(s + candidate);
                 }

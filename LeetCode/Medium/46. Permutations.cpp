@@ -22,13 +22,18 @@ typedef map<int,int> mii;
 Question : 46. Permutations
 Topic : Array, Backtracking, permutations
 Problems : https://leetcode.com/problems/permutations/
+
 ==============================> Explanation <=============================================
 
-2nd solution: We try to put every element index from [i, n-1] at current index IDX. Move to the
-next Idx. And when we back from recursion we again make the array same as previous.
 
-Try to draw tree and visualize it. Then you got idea.
+1) Backtracking with Used[]|visited[]:
+- In this approach, start from i = 0 -> N. We add the ith number if it is not already taken and next time
+we start from 0th index again. Backtrack On used[] and temp array.
 
+2) Backtraking with Swapping:
+- We try to put every element index from [i, n-1] at current index IDX. And in next call we try the same
+things but at IDX+1.
+Backtrack we again swap that already swapped element in the array.
 
 
 Time = O(N!) * O(N) (For Loop) = O(N * N!)
@@ -36,10 +41,15 @@ Space = O(N)(DS) + O(N)(Visited) + O(N)(Auxiliary)
 
 
 
+==============================> Apporach and Time Complexity <=============================================
 
+1) Backtracking + Used:
+Time: O(N * N!) (Total Call N! and each call O(N))
+Space: O(N!)(Aux) + O(N)  
 
-
-==============================> Edge Case <=============================================
+2) Backtracking + Swapping:
+Time: O(N * N!) (Total Call N! and each call O(N))
+Space: O(N!)(Aux)
 
 
 */
@@ -116,7 +126,7 @@ public:
 
 // Optimized NO Extra Space.
 
-// Time = O(N * N!) (Same)
+// Time = 
 // Space = O(N)(Auxiliary)
 class Solution {
 public:
@@ -128,8 +138,11 @@ public:
         }
 
         for(int i = 0; i < nums.size(); i++) {
+
             swap(nums[i], nums[idx]);
+
             recurPermute(idx+1, nums, ans);
+            
             // Backtrack.
             swap(nums[i], nums[idx]);
         }

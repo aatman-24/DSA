@@ -22,6 +22,24 @@ typedef map<int,int> mii;
 Question : 47. Permutations II
 Topic : Array, Backtracking, permutations
 Problems : https://leetcode.com/problems/permutations-ii/
+
+==============================> Explanation <=============================================
+
+
+1) Backtracking with Used[]|visited[]:
+- In this approach, start from i = 0 -> N. We add the ith number if it is not already taken and next time
+we start from 0th index again. Backtrack On used[] and temp array.
+
+But Again To avoid duplicate subarray into the result,
+- Don't start num[i] if (num[i-1] == num[i] and num[i-1] is already used). Dont' create a new branch.
+
+==============================> Apporach and Time Complexity <=============================================
+
+1) Backtracking + Used:
+Time: O(N * N!) (Total Call N! and each call O(N))
+Space: O(N!)(Aux) + O(N)  
+
+
 */
 
 class Solution {
@@ -39,13 +57,17 @@ public:
         }
 
         for(int i = 0; i < N; i++) {
+
            if(used[i] == 1) continue;
 
-           // We never going to start with the same number (arr[i] == arr[i-1]) when arr[i] is not in use.
+           // We never going to start with the same number (arr[i] == arr[i-1]) when arr[i-1] is not in use.
            if(i > 0 && arr[i] == arr[i-1] && (used[i-1] == 0)) continue;  
+            
             used[i] = 1;
             tmp.push_back(arr[i]);
+            
             backtrackPermute(tmp);
+            
             tmp.pop_back();
             used[i] = 0;
         }

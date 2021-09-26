@@ -103,7 +103,7 @@ public:
             swap(nums[start], nums[end]);
         }
 
-        // the nums[end] hold the number which is the last smalles number then
+        // the nums[end] hold the number which is the last smallest or equal number then
         // nums[pivot].
         swap(nums[end], nums[pivot]);
         return end;

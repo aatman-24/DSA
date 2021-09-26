@@ -31,16 +31,14 @@ Problems : https://leetcode.com/problems/combinations/
     - check how many bit is set. If it is k then add all the related element into the vector.
         and push into the answer.
 
-
-
 2) Backtracking
-- Easy and optimized.
+- DFS(Depth) can go upto the K. And BFS(For loop| Choice) can be N.
 
 
 ==============================> Apporach and Time Complexity <=============================================
 
 1) Bit manipulation subset generation:
-Time: O(N * 2^N)
+Time: O(32 * 2^N)
 Space: O(N)
 
 2) Backtracking:

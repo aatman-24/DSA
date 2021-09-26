@@ -23,27 +23,25 @@ d
 Question : 26. Remove Duplicates from Sorted Array
 Topic : Array
 Problems : https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+
 ==============================> Explanation <=============================================
+1) Brute Force: Intuition from the Insertion sort algorithm, at ith index not duplicated element was last then,
+at we are at jth index if arr[i] != arr[j] then, arr[j] is next after the arr[i], so start from the jth index
+and swap until arr[i]. just like insertion algorithm.
+
+2) Two Pointer: Sorted array all duplicate number are together so just using two pointer only the
+non-duplicate number needs to swap. At the end of array is not matter what it is.
+
+==============================> Apporach and Time Complexity <=============================================
+1) Brute Force:
+Time: O(N^2)
+Space: O(1)
+
+2) Two Pointer:
+Time: O(N)
+Space: O(1)
 
 */
-
-
-/*
-==============================> Edge Case <=============================================
-
-
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 
 
 
