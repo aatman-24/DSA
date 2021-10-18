@@ -20,7 +20,7 @@ d
 ==============================> Description <=============================================
 
 Question : 646. Maximum Length of Pair Chain
-Topic : Greedy
+Topic : Greedy, DP
 Problems : https://leetcode.com/problems/maximum-length-of-pair-chain/
 /*
 ==============================> Explanation <=============================================
@@ -48,15 +48,67 @@ Now, the greedy part is: I claim that it's always better to try to add pairA to 
 253 Meeting Rooms II
 
 
+
+2) Dynamic programming of LIS variants:
+
+parent: 300. Longest Increasing Subsequence
+
+1) Choise Diagram: If we are at current index i in the array. Then LIS[i] is the maximum among all,
+                   numbers arr[j] such that, It can be extend all the LIS for which nums[j][1] < nums[i][0].
+                   So that, reason LIS[i] = LIS[j] + 1. nums[j] < nums[i]. j can be (0 -> i).
+
+2) Base Case: LIS[i] = 1. Every number itself is LIS.
+
+3) Recurrence Relation: 
+                    for j = 0 -> i,
+                        if(nums[j][1] < nums[i][0])
+                            LIS[I] = max(LIS[i], LIS[j]+1)
+
+
 */
 
 
 /*
-==============================> Edge Case <=============================================
+==============================> Apporach and Time Complexity <=============================================
+1) DP, pattern=LIS:
+Time:O(N^2)
+Space:O(N)
 
+2) Greedy + Time Interval:
+Time: O(NlogN)
+Space: O(1)
 
 */
 
+// bottom-up..
+// need top down check parent problem
+class Solution {
+public:
+
+    int findLongestChain(vector<vector<int>>& pairs) {
+
+
+    // Each pair itself is LIS of length 1.
+    vector<int> lis(pairs.size(), 1);
+
+    sort(pairs.begin(), pairs.end());
+
+    for(int i = 1; i < pairs.size(); i++) {
+        for(int j = 0; j < i; j++) {
+            if(pairs[j][1] < pairs[i][0]) {
+                lis[i] = max(lis[i], lis[j]+1);
+            }
+        }
+    }
+
+    int ans = 0;
+    for(int i = 0; i < pairs.size(); i++) {
+        ans = max(ans, lis[i]);
+    }
+
+    return ans;
+}
+};
 
 class Solution {
 public:

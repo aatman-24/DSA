@@ -21,20 +21,27 @@ typedef map<int,int> mii;
 ==============================> Description <=============================================
 
 Question : 12. Integer to Roman
-Topic : String
+Topic : String, Number Construction
 Problems : https://leetcode.com/problems/integer-to-roman/
 
-/*
+
 ==============================> Explanation <=============================================
-Greedy Apporach Work Best. Whenever we found the number only starting with 4 | 9 
-then and only we took. combination of Roman which we already took into array and
-work as greedy.
-*/
+
+- At first sight, Greedy Algorithm works we already knew.
+
+- But what about 4, 9, 40, 90...... How to make that number.....
+
+- We just add those number into the array and make complete the greedy algortihm.
+
+==============================> Apporach and Time Complexity <=============================================
+
+1) Number Construction
+Time: O(N)
+Space: O(1)
 
 
-/*
-==============================> Edge Case <=============================================
 */
+
 
 class Solution {
 public:

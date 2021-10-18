@@ -26,32 +26,20 @@ Problems : https://leetcode.com/problems/spiral-matrix-ii/
 
 ==============================> Explanation <=============================================
 
-- Check out: 54. Spiral Matrix
+- Parent: 54. Spiral Matrix
 
 Ideas comes from here.... (left to right or right to left inclusive)
 and (up to down) or (down to up) exclusive.
 
 
-*/
+==============================> Apporach and Time Complexity <=============================================
 
-
-/*
-==============================> Edge Case <=============================================
-
-
+1) Visiting matrix in spiral way :
+Time: O(N^2)
+Space: O(1)
 
 
 */
-
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 
 class Solution {
 public:

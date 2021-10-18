@@ -26,21 +26,31 @@ Problems : https://leetcode.com/problems/string-to-integer-atoi/
 
 ==============================> Explanation <=============================================
 
-
+Algorithm:
+- Eliminate the leading space.
+- Based on sign, remember the number is pos or neg.
+- Now Unless the digit is found run the loop and make the number from the string. Also check that number is
+in range. if not then return MAX limit of interger.
+- Last return the number with positive value or negative.
 */
 
 
 /*
 ==============================> Edge Case <=============================================
-
+1) Number Construction:
+Time: O(N)
+Space: O(1)
 
 */
 
 class Solution {
 public:
+
     int myAtoi(string str) {
+
         int res=0;
         bool is_positive = true;
+        
         int i=0;
         
         while (str[i] == ' ') // count leading spaces

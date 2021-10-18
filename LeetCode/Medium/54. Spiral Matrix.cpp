@@ -20,11 +20,14 @@ typedef map<int,int> mii;
 ==============================> Description <=============================================
 
 Question : 54. Spiral Matrix
-Topic : 2DArray
+Topic : Matrix
 Problems : https://leetcode.com/problems/spiral-matrix/
-/*
+
+
 ==============================> Explanation <=============================================
-solution 1:
+
+Approach 1:
+
 use four pointer minI(up), maxI(down), minJ(left), maxJ(right).
 going to print until both (minI < maxI || minJ < maxJ) one of them true.
 - when we hit at any corner correspoding pointer needs to update.
@@ -36,7 +39,9 @@ decrement j and decrement i.
 if first then second can be or can not be as per condition.
 
 
-solution 2:
+
+Approach 2: (Go for this in Inter)
+
 - In this (left -> right) || (right <- left) are fully.
 and (up -> down) and (down -> up) is (up + 1 -> down - 1) || (down - 1 -> up + 1)
 so all squrae become at the end.
@@ -52,13 +57,11 @@ so all squrae become at the end.
 and we also check every time if all element printed or not.
 
 
-*/
+==============================> Apporach and Time Complexity <=============================================
 
-
-
-/*
-==============================> Edge Case <=============================================
-
+1) Both Apporach :
+Time: O(N^2)
+Space: O(1)
 
 */
 

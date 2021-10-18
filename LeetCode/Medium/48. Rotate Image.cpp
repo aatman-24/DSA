@@ -20,19 +20,19 @@ typedef map<int,int> mii;
 ==============================> Description <=============================================
 
 Question : 48. Rotate Image
-Topic : Array
+Topic : Array, Matrix
 Problems : https://leetcode.com/problems/rotate-image/
 
-https://leetcode.com/problems/rotate-image/discuss/18872/A-common-method-to-rotate-the-image
 /*
 ==============================> Explanation <=============================================
+Clock Wise 90 Degree -> Reverse the matrix by array + Symmentry Roataion
+AntiClock Wise 90 Degree -> Reverse all the array + Symmentry Roataion
 
 
-*/
-
-
-/*
 ==============================> Edge Case <=============================================
+1) Matrix Rotation:
+Time:O(N^2)
+Space:O(1)
 
 */
 
@@ -46,7 +46,7 @@ public:
     }
 
 /*
- * clockwise rotate
+ * clockwise rotate (90 Degree)
  * first reverse up to down, then swap the symmetry 
  * 1 2 3     7 8 9     7 4 1
  * 4 5 6  => 4 5 6  => 8 5 2
@@ -71,7 +71,7 @@ public:
     }
 
 /*
- * anticlockwise rotate
+ * anticlockwise rotate(90 Degree)
  * first reverse left to right, then swap the symmetry
  * 1 2 3     3 2 1     3 6 9
  * 4 5 6  => 6 5 4  => 2 5 8

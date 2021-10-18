@@ -22,14 +22,16 @@ typedef map<int,int> mii;
 Question : 45. Jump Game II
 Topic : DP, BFS, Greedy, Array
 Problems : https://leetcode.com/problems/jump-game-ii/
+
 /*
 ==============================> Explanation <=============================================
-This problem in which we should think greddily but do the program as dp. You can also think
+
+This problem in which we should think greedly but do the program as dp. You can also think
 as BFS. Because at current level we try to visit all the nodes one by one and select which ever is
 best do the same.
 
 
-One more approach is 
+One more approach is Last Apporach.
 - find the left most index for given position. Once we found we update pos = i and again start from the 
 index = 0 to find left most index to get pos. until pos is 0.
 
@@ -140,6 +142,7 @@ public:
         int pos = nums.size() - 1;
         int jump = 0;
         while(pos != 0) {
+
             for(int i = 0; i < pos; i++) {
 
                 // found the ith index. update pos = i and again start from the 0 .

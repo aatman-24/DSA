@@ -31,10 +31,7 @@ Problems : https://leetcode.com/problems/jump-game/
 So same logic we just keep track of how much fartherst we can go using jump. But 
 If any time if we reach at i and i > curFarthest that means we can not even reach to
 the ith index. so we can not reach at end.
-*/
 
-
-/*
 ==============================> Edge Case <=============================================
 
 
@@ -60,7 +57,6 @@ public:
         }
 
         return curFarthest >= nums.size() - 1;
-
     }
 
 };
