@@ -25,15 +25,16 @@ Topic : Maths
 Problems : https://leetcode.com/problems/palindrome-number/
 
 ==============================> Explanation <=============================================
-- Due to Boundary,
-Doing reverse the number is not good idea here.
+- Due to limit, we can not directly got reverse number using palindrome trick here.
+- We get the reverse number until the X > reverse_number. After that if X is even length then reverse_number also even length
+we directly compare it.
+- And if it is odd length then we compare X/10 == reverse_number.
 
-*/
 
-
-/*
 ==============================> Edge Case <=============================================
-
+1) Maths
+Time: O(10) -> Maximum 10 digit for int representation.
+Space: O(1)
 */
 
 

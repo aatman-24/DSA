@@ -26,7 +26,14 @@ Topic : String
 Problems : https://leetcode.com/problems/roman-to-integer/
 
 ==============================> Explanation <=============================================
+- In First Apporach, We make string of two characters and check that string is in map or not if yes then we add that('IV', 'IX')
+into the sum. Otherwise consider single character only.
 
+- Second Approach is logical. If you see, two characters roman number (IV, IX) found that first character is smaller than second character
+so we can use that approach. In roman number, VI(11) you found that first character is bigger than second one, so when first
+is smaller than second means we need to subtract that character. 
+
+    IV -> -1 + 5 = 4. 
 
 ==============================> Apporach and Time Complexity <=============================================
 
