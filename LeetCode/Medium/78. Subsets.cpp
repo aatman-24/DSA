@@ -19,56 +19,87 @@ typedef map<int,int> mii;
 /*
 ==============================> Description <=============================================
 
-Question : 1314. Matrix Block Sum
-Topic : DP, Kadane
-Problems : https://leetcode.com/problems/matrix-block-sum/
-*/
-
-#include <bits/stdc++.h>
-#define ll long long
-#define REP(i,n) for(int i = 0; i < n; i++)
-#define REP1(i,n) for(int i = 1; i <= n; i++)
-#define debug cout << "Ok" << endl;
-#define mod 1000000007
-
-using namespace std;
-
-
-typedef pair<ll,ll> ii;
-typedef vector<ii> vii;
-typedef map<char,int> mci;
-typedef vector<int> vi;
-typedef vector<ll> vll;
-typedef vector<vi> vvi;
-typedef map<int,int> mii;
-
-/*
-==============================> Description <=============================================
-
 Question : 78. Subsets
-Topic : Array
+Topic : Array, Backtracking
 Problems : https://leetcode.com/problems/subsets/
+
+==============================> Explanation <=============================================
+1) Proper Backtracking:
+
+- Either add or don't add each element. O(2^N)
+
+
+2) Iterative:
+
+- For current_num -> n... we add n each of the previous vector..
+
+
+Exmaple...
+
+{}, {1}, {2}, {1, 2}
+
+
+for 3,
+
+
+{3}, {1, 3}, {2, 3}, {1, 2, 3}
+
+Add all into the main.....
+
+
+{}, {1}, {2}, {1, 2}, {3}, {1, 3}, {2, 3}, {1, 2, 3}
+
+
+
+==============================> Apporach and Time Complexity <=============================================
+
+1) Backtracking Recursion
+Time: O(2^N)
+Space: O(N)
+
+
+1) Backtracking Iterative
+Time: O(2^N)
+Space: O(1)
+
+
 */
 
 
 class Solution {
 public:
-    vvi res;
+   
+   void backtrack(vector<int> &nums, int startFrom, vector<int> &store, vector<vector<int>> &ans) {
 
-    // O(2^N). - 4MS.
-    void recursiveSubset(vi num, vi run, int cI) {
-        if(cI == num.size()) return;
-        recursiveSubset(num, run, cI+1);
-        run.push_back(num[cI]);
-        res.push_back(run);
-        recursiveSubset(num, run, cI+1);
-    } 
-    vvi subsets(vector<int>& nums) {
-           res.clear();
-           recursiveSubset(nums, {}, 0);
-           res.push_back({});
-           return res;     
+        ans.push_back(store);
+
+        for(int i = startFrom; i < nums.size(); i++) {
+
+            store.push_back(num[i]);
+
+            backtrack(nums, i+1, store, ans);
+
+            store.pop_back();
+        }
+
+   }
+
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        
+        vector<int> store;
+
+        vector<vector<int>> ans;
+
+        backtrack(nums, 0 , store, ans);
     }
+};
+
+
+
+
+class Solution {
+public:
 
     // O(2^N). - 0MS
     vector<vector<int>> subsets(vector<int>& nums) {
@@ -85,20 +116,4 @@ public:
         return res;   
     }
     
-    // O(2^N). - 0MS
-    void backtrack(vi num, vi run, int cI, vvi &res) {
-        res.push_back(run);
-
-        for(int i = cI; i < num.size(); i++) {
-            run.push_back(num[i]);
-            backtrack(num, run, i+1, res);
-            run.pop_back();
-        }
-    }
-    vector<vector<int>> subsets(vector<int>& nums) {
-       vvi res;
-       backtrack(nums, {}, 0, res);
-       return res;   
-    }
-
 };

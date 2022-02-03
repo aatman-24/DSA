@@ -20,23 +20,22 @@ typedef map<int,int> mii;
 ==============================> Description <=============================================
 
 Question : 79. Word Search
-Topic : 2DArray
+Topic : DFS
 Problems : https://leetcode.com/problems/word-search/
-/*
+
 ==============================> Explanation <=============================================
-DFS + backtracking(mark[][]).
+- We start from each(i, j)... if kth character is match with (i, j) cell we increase the seach by for matching (k+1) with
+all four directions...
 
+- We don't visit the same cell again for single DFS call so we mark each visited cell... and in backtrack we make it again unvisited.
 
-From every (i,j) we check whether the given word is possible or not.
-and we used mark[][] so that again we can not jump to already visited position.
+- Any time if we reach the end of matching string.. means we found the string so we return true.
 
-*/
+==============================> Apporach and Time Complexity <=============================================
 
-
-
-/*
-==============================> Edge Case <=============================================
-
+1) DFS
+Time: O(N^2)
+Space: O(1)
 
 */
 class Solution {
