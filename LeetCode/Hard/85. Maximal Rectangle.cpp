@@ -21,8 +21,7 @@ typedef map<int,int> mii;
 
 Question : 85. Maximal Rectangle
 Topic : Monotone Stack, Stack
-Problems : https://leetcode.com/problems/sliding-window-maximum/
-pattern : 1 
+Problems : https://leetcode.com/problems/maximal-rectangle/
 
 /*
 ==============================> Explanation <=============================================

@@ -18,37 +18,52 @@ typedef map<int,int> mii;
 
 /*
 ==============================> Description <=============================================
-#pattern 1: Monotone Increasing Stack 
-
 
 Question : 84. Largest Rectangle in Histogram
 Topic : Monotone Increasing stack
 Problems : https://leetcode.com/problems/largest-rectangle-in-histogram/
 
-
-/*
-==============================> Edge Case <=============================================
-2] solution: i == n.size() when all elements are coverd and all are in incresing order for that.
-
-*/
-
-/*
 ==============================> Explanation <=============================================
-Apporach is same for both solution. for maximum the width we expand both side until we 
+
+Approach 1:
+
+- For the current H[i] we find the left and right boundary which less than H[i]. Doing that we find
+the (length) of Rectangle and we already have H[i] height.
+
+- For current ith we find left and right boundary separately.
+
+- width = (abs(right_boundary[i] - i) + abs(left_boundary[i] - i]) + 1(current))
+
+- Area is calculated = (i(right) - left) * currentHeight
+
+
+
+Approach 2: Monotone Increasing Stack 
+
+- Right boundary is itself.. current i.
+- We only find the left boundary using the same concept.
+- left boundary < H[i].
+
+Edge Case - i == n.size() when all elements are coverd and all are in incresing order for that.
+
+-Apporach is same for both solution. for maximum the width we expand both side until we 
 found element which is smaller than current element. 
 
 
-2nd Soultion why it works?
 
-- In stack we store element into increasing order only. for,
-- right boundary we found with curr[i] is less than or i == height.size()
-- left boundary using poping the element from the stack. if stack is empty we use 0 otherwise
-next element of the top of stack. means first smallest element index + 1.
 
-1] width = (abs(right_boundary[i] - i) + abs(left_boundary[i] - i]) + 1(current))
 
-2] Width is calculated = (i(right) - left) * currentHeight
+==============================> Apporach and Time Complexity <=============================================
+1) Stack + Vector:
+Time: O(N)
+Space: O(N)
+
+2) Stack
+Time: O(N)
+Space: O(N)
+
 */
+
 
 class Solution {
 
@@ -59,14 +74,18 @@ class Solution {
             int n = H.size();
 
             vector<int> left_boundary(n, 0), right_boundary(n,0);
+
             stack<int> st;
 
             for(int i = 0; i < n; i++) {
+                
                 while(!st.empty() && H[st.top()] >= H[i]) st.pop();
+                
                 if(st.empty())
                     left_boundary[i] = 0;
                 else
                     left_boundary[i] = st.top() + 1;
+                
                 st.push(i);
             }
 
@@ -92,14 +111,23 @@ class Solution {
     int largestRectangleArea(vector<int>& H) {
     
         stack<int> st;
+
         int maxHeight = 0;
 
         for(int i = 0; i <= H.size(); i++) {
+            
+            // Either i == H.size()
+            // Or H[st.top()] >= H[i].. we need to find boundary H[st.top()] < H[i]. so we can
+            // use current H[i] as maximum height.
             while(!st.empty() && (i == H.size() || H[st.top()] >= H[i])) {
+
                 int j = st.top(); st.pop();
+                
                 int left = st.empty() ? 0 : st.top() + 1;
+                
                 maxHeight = max(maxHeight, (i - left) * H[j]);
             }
+
             st.push(i);
         }
         return maxHeight;
