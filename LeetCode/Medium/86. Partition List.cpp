@@ -22,18 +22,16 @@ typedef map<int,int> mii;
 Question : 86. Partition List
 Topic : LinkedList
 Problems : https://leetcode.com/problems/partition-list/
-*/
 
-/*
 ==============================> Edge Case <=============================================
+- CTCI Apporach:
+- Create two separate LL. By rejoining the LL.
+- Merge both LL. Value < x  -> value >= x.
 
-
-*/
-
-
-/*
 ==============================> Explanation <=============================================
-
+1) Two Pointer
+Time: O(N)
+Space: O(1)
  
 */
 
@@ -45,36 +43,92 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+
 class Solution {
 public:
     
-    // Method 1: O(N^2) - O(1)
-    // Simple find the node which value is less than x and again 
-    // traverse the LL from the front at find the place.
 
-
-    // Method 2: O(N) - O(1) Two Pointer
     ListNode* partition(ListNode* head, int x) {
 
-        ListNode* dummy = new ListNode(INT_MIN);
-        dummy -> next = head;
+        // create two separate LL.
+        ListNode* head1 = new ListNode(INT_MIN);
+        ListNode* head2 = new ListNode(INT_MIN);
 
-        ListNode* p1 = dummy;
-        ListNode* prev = dummy;
-        ListNode* tmp = head;
+        // tail of LL.
+        ListNode* p1 = head1;
+        ListNode* p2 = head2;
+        ListNode* next = nullptr;
 
-        while(tmp != NULL) {
+        while(head != NULL) {
 
-            if(tmp -> val < x) {
-                prev -> next = tmp -> next;
-                tmp -> next = p1 -> next;
-                p1 -> next = tmp;
-                p1 = p1 -> next;
+            next = head -> next;
+            head->next = nullptr;
+
+            if(head -> val < x) {
+               p1 -> next = head;
+               p1 = head;
+            }
+            else {
+                p2 -> next = head;
+                p2 = head;
             }
 
-            prev = tmp;
-            tmp = tmp -> next;
+            head = next;
         }
-        return dummy -> next;
+
+        p1->next = nullptr;
+        p1->next = head2 -> next;
+
+        return head1->next;
+    }
+};
+
+
+
+class Solution {
+public:
+    
+
+    // CTCI Apporach.
+    ListNode* partition(ListNode* head, int x) {
+
+        ListNode *leftHead = nullptr, *leftTail = nullptr, *rightHead = nullptr, *rightTail = nullptr;
+        ListNode* next = nullptr;
+
+        while(head != nullptr) {
+
+            next = head -> next;
+            head -> next = nullptr;
+
+            if(head->val < x) {
+                if(leftHead == nullptr) {
+                    leftHead = head;
+                    leftTail = head;
+                }
+                else {
+                    leftTail -> next = head;
+                    leftTail = head;
+                }
+            }
+            else {
+                if(rightHead == nullptr) {
+                    rightHead = head;
+                    rightTail = head;
+                }
+                else {
+                    rightTail -> next = head;
+                    rightTail = head;
+                }
+            }
+
+            head = next;
+        }
+
+        if(leftHead == nullptr)
+            return rightHead;
+
+        leftTail->next=rightHead;
+
+        return leftHead;
     }
 };
