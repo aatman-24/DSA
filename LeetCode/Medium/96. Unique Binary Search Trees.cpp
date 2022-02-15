@@ -25,11 +25,18 @@ Topic : Tree, Catalan Number
 Problems : https://leetcode.com/problems/unique-binary-search-trees/
 
 ==============================> Explanation <=============================================
-If you need all the tree program then check the Apna College Playlist you found it there.
-*/
+
+Actual Tree is found in this program.
+
+- Leetcode: 95. Unique Binary Search Trees II
+
+https://github.com/aatman-24/DSA/blob/main/LeetCode/Medium/95.%20Unique%20Binary%20Search%20Trees%20II.cpp
+
+Count is application of Number therory(Catalan number: )
+    
+Formula:  C(N) = Sum(0->N-1)[C(i) * C(n-i-1)] N >= 1.
 
 
-/*
 ==============================> Edge Case <=============================================
 
 */

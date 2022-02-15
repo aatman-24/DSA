@@ -32,6 +32,20 @@ create all the subtrees (i+1, n) which is rightsubtress.
 
 Make all the combination of left with right and curr is fixed.
 
+
+Basic Blocks:
+
+CT(i+1, i) -> NULL
+
+
+CT(i,i) -> i
+          / \
+        NULL NULL
+
+CT(i, i+1) ->    i                     i+1  
+                / \   and second one   / \
+               N  i+1                 i   N
+
 */
 
 

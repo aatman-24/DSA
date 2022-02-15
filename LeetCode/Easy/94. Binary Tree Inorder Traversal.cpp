@@ -22,17 +22,11 @@ typedef map<int,int> mii;
 Question : 94. Binary Tree Inorder Traversal
 Topic : Tree
 Problems : https://leetcode.com/problems/binary-tree-inorder-traversal/
-*/
 
-
-/*
 ==============================> Edge Case <=============================================
+- Recursive.
+- Morris Inorder Tree Traversal.
 
-
-*/
-
-
-/*
 ==============================> Explanation <=============================================
 
 */
@@ -65,5 +59,50 @@ public:
         vector<int> ans;
         inorder(root, ans);
         return ans;
+    }
+};
+
+
+// Morris Inorder traversal.
+class Solution {
+public:
+    
+    vector<int> inorderTraversal(TreeNode* root) {
+        
+        vector<int> ans;
+
+        TreeNode* node = root;
+
+        while(node != nullptr) {
+
+            if(node->left == nullptr) {
+                 ans.push_back(node->val);
+                node = node -> right;
+            }
+            else {
+                
+                TreeNode* temp = node -> left;
+                
+                while(temp->right != nullptr && temp->right != node) {
+                    temp = temp->right;
+                }
+
+                // make link from temp -> node.
+                if(temp->right == nullptr) {
+                    temp->right = node;
+                    node = node -> left;
+                }
+
+                // clear the link and jump to the previous root.
+                else {
+                    temp->right = nullptr;
+                    ans.push_back(node->val);
+                    node = node -> right;
+                }
+            }
+        }
+
+        return ans;
+
     }
 };
